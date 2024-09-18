@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Rot13 {
 
     public static final String abc = "abcdefghijklmnopqrstuvwxyz";
+    public static final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static void main (String[] args){
         Scanner scann = new Scanner(System.in);
@@ -10,7 +11,7 @@ public class Rot13 {
         String cadena = scann.nextLine();
 
         System.out.println(xifratRot13(cadena));
-        //System.out.println(desxifratRot13(cadena));
+        System.out.println(desxifratRot13(xifratRot13(cadena)));
     }
 
     public static String xifratRot13 (String cadena) {
@@ -18,12 +19,20 @@ public class Rot13 {
         for (int i = 0; i < cadena.length(); i++) {
             for (int j = 0; j < abc.length()-1; j++) {
                 char letra = cadena.charAt(i);
-                char letra2 = abc.charAt(j);
-                if (letra==letra2) {
-                    if (j >= 13) {
-                        vacio = vacio + abc.charAt(j+13-abc.length());
-                    } else {
-                        vacio = vacio + abc.charAt(j+13);
+                if (Character.isLetter(letra)) {
+                    if (letra==abc.charAt(j)) {
+                        if (j >= 13) {
+                            vacio = vacio + abc.charAt(j+13-abc.length());
+                        } else {
+                            vacio = vacio + abc.charAt(j+13);
+                        }
+                    }
+                    if (letra==ABC.charAt(j)) {
+                        if (j >= 13) {
+                            vacio = vacio + ABC.charAt(j+13-ABC.length());
+                        } else {
+                            vacio = vacio + ABC.charAt(j+13);
+                        }
                     }
                 }
             }
@@ -31,7 +40,29 @@ public class Rot13 {
         return vacio;
     }
 
-    //public static String desxifratRot13(String cadena) {
-
-    //}
+    public static String desxifratRot13(String cadena) {
+        String vacio = "";
+        for (int i = 0; i < cadena.length(); i++) {
+            for (int j = 0; j < abc.length(); j++) {
+                char letra = cadena.charAt(i);
+                if (Character.isLetter(letra)) {
+                    if (letra==abc.charAt(j)) {
+                        if (j < 13) {
+                            vacio = vacio + abc.charAt(abc.length()-13+j);
+                        } else {
+                            vacio = vacio + abc.charAt(j-13);
+                        }
+                    }
+                    if (letra==ABC.charAt(j)) {
+                        if (j < 13) {
+                            vacio = vacio + ABC.charAt(ABC.length()-13+j);
+                        } else {
+                            vacio = vacio + ABC.charAt(j-13);
+                        }
+                    }
+                }
+            }
+        }
+        return vacio;
+    }
 }
