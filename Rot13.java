@@ -7,19 +7,22 @@ public class Rot13 {
 
     public static void main (String[] args){
         Scanner scann = new Scanner(System.in);
-        System.out.println("Introduzca la cadena");
+        System.out.println("Introduzca la contraseña");
         String cadena = scann.nextLine();
-
-        System.out.println(xifratRot13(cadena));
-        System.out.println(desxifratRot13(xifratRot13(cadena)));
+        if (cadena.isEmpty() || cadena.isBlank()) {
+            System.out.println("Error, debe introducir una contraseña");
+        } else {
+            System.out.println("Contraseña cifrada: " + xifratRot13(cadena));
+            System.out.println("Contraseña descifrada: " + desxifratRot13(xifratRot13(cadena)));
+        }
     }
 
     public static String xifratRot13 (String cadena) {
         String vacio = "";
         for (int i = 0; i < cadena.length(); i++) {
-            for (int j = 0; j < abc.length()-1; j++) {
-                char letra = cadena.charAt(i);
-                if (Character.isLetter(letra)) {
+            char letra = cadena.charAt(i);
+            if (Character.isLetter(letra)) {
+                for (int j = 0; j < abc.length(); j++) {
                     if (letra==abc.charAt(j)) {
                         if (j >= 13) {
                             vacio = vacio + abc.charAt(j+13-abc.length());
@@ -35,6 +38,8 @@ public class Rot13 {
                         }
                     }
                 }
+            } else {
+                vacio = vacio + cadena.charAt(i);
             }
         }
         return vacio;
@@ -43,9 +48,9 @@ public class Rot13 {
     public static String desxifratRot13(String cadena) {
         String vacio = "";
         for (int i = 0; i < cadena.length(); i++) {
-            for (int j = 0; j < abc.length(); j++) {
-                char letra = cadena.charAt(i);
-                if (Character.isLetter(letra)) {
+            char letra = cadena.charAt(i);
+            if (Character.isLetter(letra)) {
+                for (int j = 0; j < abc.length(); j++) {
                     if (letra==abc.charAt(j)) {
                         if (j < 13) {
                             vacio = vacio + abc.charAt(abc.length()-13+j);
@@ -61,6 +66,8 @@ public class Rot13 {
                         }
                     }
                 }
+            } else {
+                vacio = vacio + cadena.charAt(i);
             }
         }
         return vacio;
