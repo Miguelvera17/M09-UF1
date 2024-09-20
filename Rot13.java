@@ -57,7 +57,7 @@ public class Rot13 {
         String vacio = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
-            if (Character.isLetter(letra)) {
+            if (esLetra(letra)) {
                 for (int j = 0; j < abc.length(); j++) {
                     if (letra==abc.charAt(j)) {
                         if (j < 13) {
@@ -79,5 +79,15 @@ public class Rot13 {
             }
         }
         return vacio;
+    }
+
+    public static boolean esLetra (char letra) {
+        for (int i = 0; i < cadena.length(); i++) {
+            char letra = cadena.charAt(i);
+            if (Character.isLetter(letra)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
