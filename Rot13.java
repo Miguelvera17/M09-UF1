@@ -8,17 +8,17 @@ public class Rot13 {
     public static void main (String[] args){
         Scanner scann = new Scanner(System.in);
         Scanner scann2 = new Scanner(System.in);
-        System.out.println("Introduzca la contraseña");
+        System.out.println("\n Introduzca la contraseña");
         String cadena = scann.nextLine();
         if (cadena.isEmpty() || cadena.isBlank()) {
             System.out.println("Error, debe introducir una contraseña");
         } else {
-            System.out.println("Indique si desea \"cifrar\" o \"descifrar\"");
+            System.out.println("\n Indique si desea \"cifrar\" o \"descifrar\"");
             String accion = scann2.nextLine();
             if (accion.equals("cifrar")) {
-                System.out.println("Contraseña cifrada: " + xifratRot13(cadena));
+                System.out.println("\n Contraseña cifrada: " + xifratRot13(cadena));
             } if (accion.equals("descifrar")) {
-                System.out.println("Contraseña descifrada: " + desxifratRot13(cadena));
+                System.out.println("\n Contraseña descifrada: " + desxifratRot13(cadena));
             } //if(!accion.equals("cifrar") || !accion.equals("descifrar")) {
                 //System.out.println("No es una opción correcta");
             //}
@@ -29,7 +29,7 @@ public class Rot13 {
         String vacio = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
-            if (Character.isLetter(letra)) {
+            if (esLetra(letra)) {
                 for (int j = 0; j < abc.length(); j++) {
                     if (letra==abc.charAt(j)) {
                         if (j >= 13) {
@@ -82,11 +82,8 @@ public class Rot13 {
     }
 
     public static boolean esLetra (char letra) {
-        for (int i = 0; i < cadena.length(); i++) {
-            char letra = cadena.charAt(i);
-            if (Character.isLetter(letra)) {
-                return true;
-            }
+        if (Character.isLetter(letra)) {
+            return true;
         }
         return false;
     }
