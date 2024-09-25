@@ -16,9 +16,9 @@ public class Rot13 {
             System.out.println("\n Indique si desea \"cifrar\" o \"descifrar\"");
             String accion = scann2.nextLine();
             if (accion.equals("cifrar")) {
-                System.out.println("\n Contraseña cifrada: " + xifraRot13(cadena, ABC, ABCMAY));
+                System.out.println("\n Contraseña cifrada: " + xifraRot13(cadena));
             } if (accion.equals("descifrar")) {
-                System.out.println("\n Contraseña descifrada: " + desxifraRot13(cadena, ABC, ABCMAY));
+                System.out.println("\n Contraseña descifrada: " + desxifraRot13(cadena));
             } //if(!accion.equals("cifrar") || !accion.equals("descifrar")) {
                 //System.out.println("No es una opción correcta");
             //}
@@ -30,38 +30,38 @@ public class Rot13 {
         else {return false;}
     }
 
-    public static String xifraRot13 (String cadena, String abc, String ABCm) {
+    public static String xifraRot13 (String cadena) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
             if (esLetra(letra)) {
-                for (int j = 0; j < abc.length(); j++) {
-                    if (letra==abc.charAt(j)) {
-                            if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
-                            else {s = s + abc.charAt(j+13);}
+                for (int j = 0; j < ABC.length(); j++) {
+                    if (letra==ABC.charAt(j)) {
+                            if (j >= 13) {s = s + ABC.charAt(j+13-ABC.length());} 
+                            else {s = s + ABC.charAt(j+13);}
                     }
-                    if (letra==ABCm.charAt(j)) {
-                        if (j >= 13) {s = s + ABCm.charAt(j+13-ABCm.length());} 
-                        else {s = s + ABCm.charAt(j+13);}
+                    if (letra==ABCMAY.charAt(j)) {
+                        if (j >= 13) {s = s + ABCMAY.charAt(j+13-ABCMAY.length());} 
+                        else {s = s + ABCMAY.charAt(j+13);}
                     } 
                 }
             } else {s = s + cadena.charAt(i);}
         } return s;
     } 
     
-    public static String desxifraRot13 (String cadena, String abc, String ABCm) {
+    public static String desxifraRot13 (String cadena) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
             if (esLetra(letra)) {
-                for (int j = 0; j < abc.length(); j++) {
-                    if (letra==abc.charAt(j)) {
-                            if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
-                            else {s = s + abc.charAt(j+13);}
+                for (int j = 0; j < ABC.length(); j++) {
+                    if (letra==ABC.charAt(j)) {
+                            if (j >= 13) {s = s + ABC.charAt(j+13-ABC.length());} 
+                            else {s = s + ABC.charAt(j+13);}
                     }
-                    if (letra==ABCm.charAt(j)) {
-                        if (j >= 13) {s = s + ABCm.charAt(j+13-ABCm.length());} 
-                        else {s = s + ABCm.charAt(j+13);}
+                    if (letra==ABCMAY.charAt(j)) {
+                        if (j >= 13) {s = s + ABCMAY.charAt(j+13-ABCMAY.length());} 
+                        else {s = s + ABCMAY.charAt(j+13);}
                     } 
                 }
             } else {s = s + cadena.charAt(i);}
