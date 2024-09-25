@@ -38,8 +38,10 @@ public class Rot13 {
                 for (int j = 0; j < abc.length(); j++) {
                     if (letra==abc.charAt(j)) {
                         if (accion.equals("cifrar")) {
-                            if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
-                            else {s = s + abc.charAt(j+13);}
+                            if (letra==abc.charAt(j)) {
+                                if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
+                                else {s = s + abc.charAt(j+13);}
+                            }
                         } 
                         if (letra==ABCm.charAt(j)) {
                             if (j >= 13) {s = s + ABCm.charAt(j+13-ABCm.length());} 
