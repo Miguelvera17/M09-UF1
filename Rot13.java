@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Rot13 {
 
-    public static final String abc = "abcdefghijklmnopqrstuvwxyz";
-    public static final String ABCm = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String ABC = "abcdefghijklmnopqrstuvwxyz";
+    public static final String ABCMAY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static void main (String[] args){
         Scanner scann = new Scanner(System.in);
@@ -16,9 +16,9 @@ public class Rot13 {
             System.out.println("\n Indique si desea \"cifrar\" o \"descifrar\"");
             String accion = scann2.nextLine();
             if (accion.equals("cifrar")) {
-                System.out.println("\n Contraseña cifrada: " + construye(cadena, abc, ABCm, accion));
+                System.out.println("\n Contraseña cifrada: " + xifraRot13(cadena, ABC, ABCMAY));
             } if (accion.equals("descifrar")) {
-                System.out.println("\n Contraseña descifrada: " + construye(cadena, abc, ABCm, accion));
+                System.out.println("\n Contraseña descifrada: " + desxifraRot13(cadena, ABC, ABCMAY));
             } //if(!accion.equals("cifrar") || !accion.equals("descifrar")) {
                 //System.out.println("No es una opción correcta");
             //}
@@ -30,37 +30,41 @@ public class Rot13 {
         else {return false;}
     }
 
-    public static String construye (String cadena, String abc, String ABCm, String accion) {
+    public static String xifraRot13 (String cadena, String abc, String ABCm) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
             if (esLetra(letra)) {
                 for (int j = 0; j < abc.length(); j++) {
-                    if (accion.equals("cifrar")) {
-                        if (letra==abc.charAt(j)) {
-                                if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
-                                else {s = s + abc.charAt(j+13);}
-                            }
-                        } 
-                        if (letra==ABCm.charAt(j)) {
-                            if (j >= 13) {s = s + ABCm.charAt(j+13-ABCm.length());} 
-                            else {s = s + ABCm.charAt(j+13);}
-                    }     
-
-                    if (accion.equals("descifrar")) {
-                        if (letra==abc.charAt(j)) {
-                            if (j < 13) {s = s + abc.charAt(abc.length()-13+j);} 
-                            else {s = s + abc.charAt(j-13);}
-                        }
-                        if (letra==ABCm.charAt(j)) {
-                            if (j < 13) {s = s + ABCm.charAt(ABCm.length()-13+j);} 
-                            else {s = s + ABCm.charAt(j-13);}
-                        }
+                    if (letra==abc.charAt(j)) {
+                            if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
+                            else {s = s + abc.charAt(j+13);}
                     }
+                    if (letra==ABCm.charAt(j)) {
+                        if (j >= 13) {s = s + ABCm.charAt(j+13-ABCm.length());} 
+                        else {s = s + ABCm.charAt(j+13);}
+                    } 
                 }
-            } 
-            else {s = s + cadena.charAt(i);}
-        }
-        return s;
+            } else {s = s + cadena.charAt(i);}
+        } return s;
+    } 
+    
+    public static String desxifraRot13 (String cadena, String abc, String ABCm) {
+        String s = "";
+        for (int i = 0; i < cadena.length(); i++) {
+            char letra = cadena.charAt(i);
+            if (esLetra(letra)) {
+                for (int j = 0; j < abc.length(); j++) {
+                    if (letra==abc.charAt(j)) {
+                            if (j >= 13) {s = s + abc.charAt(j+13-abc.length());} 
+                            else {s = s + abc.charAt(j+13);}
+                    }
+                    if (letra==ABCm.charAt(j)) {
+                        if (j >= 13) {s = s + ABCm.charAt(j+13-ABCm.length());} 
+                        else {s = s + ABCm.charAt(j+13);}
+                    } 
+                }
+            } else {s = s + cadena.charAt(i);}
+        } return s;
     }
 }
