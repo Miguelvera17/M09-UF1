@@ -38,7 +38,7 @@ public class Rot132 {
             if (esLetra(letra)) {
                 for (int j = 0; j < ABC.length; j++) {
                     if (letra==ABC[j]) {
-                            if (j >= desplazamiento) {s = s + ABC[j+desplazamiento-ABC.length];} 
+                            if (6 < j) {s = s + ABC[ABC.length-desplazamiento-1];} 
                             else {s = s + ABC[j+desplazamiento];}
                     }
                     if (letra==ABCMAY[j]) {
