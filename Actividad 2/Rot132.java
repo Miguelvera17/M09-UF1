@@ -57,12 +57,12 @@ public class Rot132 {
             if (esLetra(letra)) {
                 for (int j = 0; j < ABC.length; j++) {
                     if (letra==ABC[j]) {
-                            if (j >= desplazamiento) {s = s + ABC[j+desplazamiento-ABC.length];} 
-                            else {s = s + ABC[j+desplazamiento];}
+                            if (j < desplazamiento) {s = s + ABC[ABC.length-j-desplazamiento];} 
+                            else {s = s + ABC[j-desplazamiento];}
                     }
                     if (letra==ABCMAY[j]) {
-                        if (j >= desplazamiento) {s = s + ABCMAY[j+desplazamiento-ABCMAY.length];} 
-                        else {s = s + ABCMAY[j+desplazamiento];}
+                        if (j < desplazamiento) {s = s + ABCMAY[ABCMAY.length-j-desplazamiento];} 
+                        else {s = s + ABCMAY[j-desplazamiento];}
                     } 
                 }
             } else {s = s + cadena.charAt(i);}
