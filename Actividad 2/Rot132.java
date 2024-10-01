@@ -19,9 +19,9 @@ public class Rot132 {
             System.out.println("Indique la cantidad a desplazar");
             int desplaza = Integer.parseInt(scann3.nextLine());
             if (accion.equals("cifrar")) {
-                System.out.println("\n Contraseña cifrada: " + xifraRot13(cadena, desplaza));
+                System.out.println("\n Contraseña cifrada: " + xifraRotX(cadena, desplaza));
             } if (accion.equals("descifrar")) {
-                System.out.println("\n Contraseña descifrada: " + desxifraRot13(cadena, desplaza));
+                System.out.println("\n Contraseña descifrada: " + desxifraRotX(cadena, desplaza));
             }
         }
     }
@@ -31,7 +31,7 @@ public class Rot132 {
         else {return false;}
     }
 
-    public static String xifraRot13 (String cadena, int desplazamiento) {
+    public static String xifraRotX (String cadena, int desplazamiento) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
@@ -50,7 +50,7 @@ public class Rot132 {
         } return s;
     } 
     
-    public static String desxifraRot13 (String cadena, int desplazamiento) {
+    public static String desxifraRotX (String cadena, int desplazamiento) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
