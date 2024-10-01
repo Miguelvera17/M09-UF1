@@ -12,7 +12,7 @@ public class Rot132 {
         if (cadena.isEmpty() || cadena.isBlank()) {
             System.out.println("Error, debe introducir una contraseña");
         } else {
-            System.out.println("\n Indique si desea \"cifrar\"(c) o \"descifrar\"(d) o \"fuerza bruta\"(f)");
+            System.out.println("\n Indique si desea \"cifrar\"[c] o \"descifrar\"[d] o \"fuerza bruta\"[f]");
             String accion = sc.nextLine();
             System.out.println("Indique la cantidad a desplazar (valido de 0 a 25)");
             int desplaza = Integer.parseInt(sc.nextLine());
@@ -23,9 +23,8 @@ public class Rot132 {
                 System.out.println("\n Contraseña descifrada: " + desxifraRotX(cadena, desplaza));
             }
             if (accion.equals("f")) {
-                for (int i = 0; i < 26; i++) {
-                    System.out.println("\n Contraseña desplazada " + i + " posición: " + forcaBrutaRotX(xifraRotX(cadena, desplaza)));
-                }
+                System.out.println("La contraseña cifrada es: " + xifraRotX(cadena, desplaza));
+                System.out.println(forcaBrutaRotX(xifraRotX(cadena, desplaza)));
             }
         }
     }
@@ -84,20 +83,28 @@ public class Rot132 {
 
     public static String forcaBrutaRotX(String cadena) {
         String s = "";
-        for (int i = 0; i < cadena.length(); i++) {
-            char letra = cadena.charAt(i);
-            if (esLetra(letra)) {
-                for (int j = 0; j < ABC.length; j++) {
-                    if (letra==ABC[j]) {
-                        if (j >= 1) {s = s + ABC[(j-1)];} 
-                        if (j < 1) {s = s + ABC[ABC.length-1+j];}
-                }
-                if (letra==ABCMAY[j]) {
-                    if (j >= 1) {s = s + ABCMAY[j-1];} 
-                    if (j < 1) {s = s + ABCMAY[ABCMAY.length-1+j];}
-                } 
-                }
-            } else {s = s + cadena.charAt(i);}
+        for (int k = 0; k < 26; k++) {
+            for (int i = 0; i < cadena.length(); i++) {
+                char letra = cadena.charAt(i);
+                if (esLetra(letra)) {
+                    for (int j = 0; j < ABC.length; j++) {
+                        if (letra==ABC[j]) {
+                                if (j >= k) {s = s + ABC[(j-k)];} 
+                                if (j < k) {s = s + ABC[ABC.length-k+j];}
+                        }
+                        if (letra==ABCMAY[j]) {
+                            if (j >= k) {s = s + ABCMAY[j-k];} 
+                            if (j < k) {s = s + ABCMAY[ABCMAY.length-k+j];}
+                        } 
+                    }
+                } else {s = s + cadena.charAt(i);}
+            }
+            if (k == 1) {
+                s = s + "\t" + " Contraseña descifrada " +  k + " posición" + "\n";
+            }
+            if (k != 1) {
+                s = s + "\t" + " Contraseña descifrada " +  k + " posiciones" +"\n";
+            }
         } return s;
     }
 }
