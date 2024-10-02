@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Rot132 {
 
-    public static final char[] ABC = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-    public static final char[] ABCMAY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    public static final char[] ABC = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
+    public static final char[] ABCMAY = "AÀÁBCÇDEÈÉFGHIÍÏJKLMNÑOÓÒPQRSTUÚÜVWXYZ".toCharArray();
 
     public static void main (String[] args){
         Scanner sc = new Scanner(System.in);
