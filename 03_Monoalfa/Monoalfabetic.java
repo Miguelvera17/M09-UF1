@@ -4,20 +4,24 @@ import java.util.ArrayList;
 
 public class Monoalfabetic {
     public static final char[] alfabet = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
-    public static char[] a = permutaAlfabet(alfabet);
+    public static char[] alfabetPermuta = permutaAlfabet(alfabet);
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n Introduzca una palabra");
         String cadena = sc.nextLine();
         System.out.println("\n Indique si desea \"cifrar\"[c] o \"descifrar\"[d]");
+        System.out.print("---> ");
         String accion = sc.nextLine();
-        System.out.print(a);
+        for(int i = 0; i< alfabet.length; i++) {
+            System.out.print(alfabet[i]);
+        }
+        System.out.print(alfabetPermuta);
         if (accion.equals("c")) {
-            System.out.println("\n Contraseña cifrada: " + xifraMonoAlfa(cadena));
+            System.out.println("\nContraseña cifrada: " + xifraMonoAlfa(cadena));
         } 
         if (accion.equals("d")) {
-            System.out.println("\n Contraseña descifrada: " + desxifraMonoAlfa(cadena));
+            System.out.println("\nContraseña descifrada: " + desxifraMonoAlfa(cadena));
         }
     }
 
@@ -41,7 +45,7 @@ public class Monoalfabetic {
             if (esLetra(Character.toLowerCase(letra))) {
                 for (int j = 0; j < alfabet.length; j++) {
                     if (letra == alfabet[j]) {
-                        s = s + a[j];
+                        s = s + alfabetPermuta[j];
                     }
                 }
             } else {s = s + letra;}
@@ -53,8 +57,8 @@ public class Monoalfabetic {
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
             if (esLetra(Character.toLowerCase(letra))) {
-                for (int j = 0; j < a.length; j++) {
-                    if (letra==a[j]) {
+                for (int j = 0; j < alfabetPermuta.length; j++) {
+                    if (letra==alfabetPermuta[j]) {
                         s = s + alfabet[j];
                     }
                 }
