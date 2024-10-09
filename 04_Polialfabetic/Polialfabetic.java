@@ -2,9 +2,11 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Monoalfabetic {
+public class Polialfabetic {
+
     public static final char[] alfabet = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
     public static char[] alfabetPermuta = permutaAlfabet(alfabet);
+    public static String clauSecreta;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -91,3 +93,4 @@ public class Monoalfabetic {
         else {return false;}
     }
 }
+

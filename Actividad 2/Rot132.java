@@ -27,6 +27,7 @@ public class Rot132 {
                 System.out.println(forcaBrutaRotX(xifraRotX(cadena, desplaza)));
             }
         }
+        sc.close();
     }
 
     public static boolean esLetra (char letra) {
@@ -39,7 +40,6 @@ public class Rot132 {
     }
 
     public static String xifraRotX (String cadena, int desplazamiento) {
-        char[] especiales = "àáèéíòóúüñç".toCharArray();
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);

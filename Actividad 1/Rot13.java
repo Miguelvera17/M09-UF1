@@ -23,6 +23,8 @@ public class Rot13 {
                 //System.out.println("No es una opción correcta");
             //}
         }
+        scann.close();
+        scann2.close();
     }
 
     public static boolean esLetra (char letra) {
