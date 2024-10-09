@@ -1,35 +1,34 @@
 import java.util.Collections;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Polialfabetic {
 
     public static final char[] alfabet = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
     public static char[] alfabetPermuta = permutaAlfabet(alfabet);
     public static String clauSecreta;
+    public static Random random;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\n Introduzca una palabra");
-        String cadena = sc.nextLine();
-        System.out.println("\n Indique si desea \"cifrar\"[c] o \"descifrar\"[d]");
-        System.out.print("---> ");
-        String accion = sc.nextLine();
-        System.out.print("\nAlfabeto original:  ");
-        System.out.print(alfabet);
-        System.out.println("\n                    ||||||||||||||||||||||||||||||||||||||");
-        System.out.print("Alfabeto permutado: ");
-        System.out.print(alfabetPermuta);
-        System.out.println("\n");
-        if (accion.equals("c")) {
-            System.out.println("\nContraseña cifrada: " + xifraMonoAlfa(cadena));
-        } 
-        if (accion.equals("d")) {
-            System.out.println("\nContraseña descifrada: " + desxifraMonoAlfa(cadena));
+        String msgs[] = {"Test 01 àrbritre, coixí, Perímetre","Test 02 Taüll, DÍA, año","Test 03 Peça, Òrrius, Bòvila"};
+        String msgsXifrats [] = new String[msgs.length];
+        System.out.println("Xifratge:\n--------");
+        for (int i = 0; i < msgs.length; i++) {
+            initRandom(clauSecreta);
+            msgsXifrats [i] = xifraPoliAlfa (msgs[i]);
+            System.out.printf("%-34s -> %s%n", msgs[i], msgsXifrats [i]);
         }
-        sc.close();
+        System.out.println("Desxifratge: \n-----------" );
+        for (int i = 0; i < msgs.length; i++) {
+            initRandom(clauSecreta);
+            String msg = desxifraPoliAlfa (msgsXifrats [i]);
+            System.out.printf("%-34s -> %s%n", msgsXifrats [i], msg);
+        }
     }
-
+    private static void initRandom(String clauSecreta) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'initRandom'");
+    }
     public static char[] permutaAlfabet(char[] alfabet) {
         ArrayList<Character> abclist = new ArrayList<>();
         for (char i : alfabet) {
@@ -43,7 +42,7 @@ public class Polialfabetic {
         return abcPermuta;
     }
 
-    public static String xifraMonoAlfa (String cadena) {
+    public static String xifraPoliAlfa (String cadena) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
@@ -66,7 +65,7 @@ public class Polialfabetic {
         } return s;
     } 
     
-    public static String desxifraMonoAlfa (String cadena) {
+    public static String desxifraPoliAlfa (String cadena) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
