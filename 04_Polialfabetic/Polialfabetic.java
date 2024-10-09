@@ -5,8 +5,8 @@ import java.util.Random;
 public class Polialfabetic {
 
     public static final char[] alfabet = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
-    public static char[] alfabetPermuta = permutaAlfabet(alfabet);
-    public static String clauSecreta;
+    public static char[] alfabetPermuta;
+    public static int clauSecreta = 1821; //independencia del peru
     public static Random random;
 
     public static void main(String[] args) {
@@ -25,26 +25,29 @@ public class Polialfabetic {
             System.out.printf("%-34s -> %s%n", msgsXifrats [i], msg);
         }
     }
-    private static void initRandom(String clauSecreta) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initRandom'");
+    
+    private static void initRandom(int clauSecreta) {
+        random = new Random(clauSecreta);
     }
-    public static char[] permutaAlfabet(char[] alfabet) {
+    
+    public static void permutaAlfabet() {
+        alfabetPermuta = new char[alfabet.length];
         ArrayList<Character> abclist = new ArrayList<>();
+
         for (char i : alfabet) {
             abclist.add(i);
         }
-        Collections.shuffle(abclist);
-        char [] abcPermuta = new char[abclist.size()];
+        Collections.shuffle(abclist, random);
+        
         for (int i = 0; i < abclist.size(); i++) {
-            abcPermuta[i] = abclist.get(i);
+            alfabetPermuta[i] = abclist.get(i);
         }
-        return abcPermuta;
     }
 
     public static String xifraPoliAlfa (String cadena) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
+            permutaAlfabet();
             char letra = cadena.charAt(i);
             if (esLetra(letra)) {
                 if (Character.isUpperCase(letra)) {
@@ -68,6 +71,7 @@ public class Polialfabetic {
     public static String desxifraPoliAlfa (String cadena) {
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
+            permutaAlfabet();
             char letra = cadena.charAt(i);
             if (esLetra((letra))) {
                 if (Character.isUpperCase(letra)) {
