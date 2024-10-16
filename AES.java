@@ -56,7 +56,7 @@ public class AES {
     }
 
     public static void main(String[] args) {
-        String msgs[] = {"Lorem ipsum dicet", "Hola Andrés cómo está tu cuñado","Àgora ïlla Ôtto"};
+        String msgs[] = {"Lorem ipsum dicet", "Hola Andrés cómo está tu cuñado","Àgora ïlla Ôtto", ")(/&%$)"};
         for (int i = 0; i < msgs.length; i++) {
             String msg = msgs[i];
             byte[] bXifrats = null;
