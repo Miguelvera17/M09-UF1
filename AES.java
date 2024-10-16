@@ -16,7 +16,7 @@ public class AES {
 
     public static byte[] xifraAES(String msg, String clau) throws Exception {
         //Obtenir els bytes de l’String
-        byte[] msgBytes = msg.getBytes();
+        byte[] msgBytes = msg.getBytes("UTF-8");
         // Genera IvParameterSpec
         SecureRandom random = new SecureRandom();
         random.nextBytes(iv);
