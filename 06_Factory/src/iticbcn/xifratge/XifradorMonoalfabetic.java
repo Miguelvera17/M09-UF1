@@ -2,7 +2,7 @@ package iticbcn.xifratge;
 import java.util.Collections;
 import java.util.ArrayList;
 
-public class XifradorMonoalfabetic {
+public class XifradorMonoalfabetic implements Xifrador{
     
     public final char[] alfabet = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
     public char[] alfabetPermuta = permutaAlfabet(alfabet);

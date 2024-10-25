@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class XifradorPolialfabetic {
+public class XifradorPolialfabetic implements Xifrador{
 
     public final char[] alfabet = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
     public char[] alfabetPermuta;

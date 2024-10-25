@@ -54,4 +54,16 @@ public class XifradorAES implements Xifrador{
         // return String desxifrat
         return new String(decryptedMsg, "UTF-8");   
     }
+
+    @Override
+    public TextXifrat xifra(String msg, String clau) throws ClauNoSuportada {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'xifra'");
+    }
+
+    @Override
+    public String desxifra(TextXifrat xifrat, String clau) throws ClauNoSuportada {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'desxifra'");
+    }
 }
