@@ -1,3 +1,4 @@
+package Actividad2;
 import java.util.Scanner;
 
 public class Rot132 {
@@ -27,6 +28,7 @@ public class Rot132 {
                 System.out.println(forcaBrutaRotX(xifraRotX(cadena, desplaza)));
             }
         }
+        sc.close();
     }
 
     public static boolean esLetra (char letra) {
