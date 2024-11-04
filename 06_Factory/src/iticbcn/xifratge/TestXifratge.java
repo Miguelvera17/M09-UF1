@@ -1,6 +1,6 @@
 package iticbcn.xifratge;
 
-public class TestXifratge {
+public class TestXifratge{
 
     public static void main(String[] args) {
         

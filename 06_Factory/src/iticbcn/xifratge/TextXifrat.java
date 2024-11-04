@@ -9,7 +9,7 @@ public class TextXifrat {
     }
 
     public String toString() {
-        return String.format(null, null);
+        return new String(arrayBytes);
     }
 
     public byte[] getBytes() {
