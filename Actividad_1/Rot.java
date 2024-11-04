@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class RotX {
+public class Rot {
 
     public static final String ABC = "abcdefghijklmnopqrstuvwxyz";
     public static final String ABCMAY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

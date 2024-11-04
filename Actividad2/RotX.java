@@ -1,7 +1,7 @@
 package Actividad2;
 import java.util.Scanner;
 
-public class Rot132 {
+public class RotX {
 
     public static final char[] ABC = "aàábcçdeèéfghiíïjklmnñoóòpqrstuúüvwxyz".toCharArray();
     public static final char[] ABCMAY = "AÀÁBCÇDEÈÉFGHIÍÏJKLMNÑOÓÒPQRSTUÚÜVWXYZ".toCharArray();
