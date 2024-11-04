@@ -30,16 +30,11 @@ public class Rot132 {
     }
 
     public static boolean esLetra (char letra) {
-        char[] especiales = "àáèéíòóúüñç".toCharArray();
-        for (int i = 0; i < especiales.length; i++) {
-            if (i == letra) {return true;}
-        }
         if (Character.isLetter(letra)) {return true;}
         else {return false;}
     }
 
     public static String xifraRotX (String cadena, int desplazamiento) {
-        char[] especiales = "àáèéíòóúüñç".toCharArray();
         String s = "";
         for (int i = 0; i < cadena.length(); i++) {
             char letra = cadena.charAt(i);
