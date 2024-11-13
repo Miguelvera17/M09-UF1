@@ -26,7 +26,7 @@ public class Hashes {
         int iterations = 10000;
         int keyLength = 512;
         PBEKeySpec spec = new PBEKeySpec(pw.toCharArray(), salt.getBytes(), iterations, keyLength);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2");
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
         byte[] hashBytes = skf.generateSecret(spec).getEncoded();
         HexFormat hex = HexFormat.of();
         hash = hex.formatHex(hashBytes);
@@ -35,13 +35,13 @@ public class Hashes {
 
     public String forcaBruta(String alg, String hash, String salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String charset = "abcdefABCDEF1234567890!";
-        // Reiniciar el contador de passwords probados
+                String charset = "abcdefABCDEF1234567890!";
+                npass = 0; // Reiniciar el contador de passwords probados
+                char[] attempt = new char[6];
 
         // Intentar todas las combinaciones de longitud de 1 a 6
         for (int len = 1; len <= 6; len++) {
             // Array para almacenar la contraseña en prueba
-            char[] attempt = new char[len];
 
             // Bucle para longitud 1
             for (int i = 0; i < charset.length(); i++) {
@@ -120,7 +120,7 @@ public class Hashes {
                 millis);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException{
         String salt = "qpoweiruañslkdfjz";
         String pw = "aaabF!";
         Hashes h = new Hashes();
