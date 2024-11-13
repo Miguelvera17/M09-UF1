@@ -23,7 +23,7 @@ public class Hashes {
     }
 
     public String getPBKDF2AmbSalt(String pw, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        int iterations = 10000;
+        int iterations = 5;
         int keyLength = 512;
         PBEKeySpec spec = new PBEKeySpec(pw.toCharArray(), salt.getBytes(), iterations, keyLength);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
@@ -33,51 +33,45 @@ public class Hashes {
         return hash;
     }
 
-    public String forcaBruta(String alg, String hash, String salt)
-            throws NoSuchAlgorithmException, InvalidKeySpecException {
-                String charset = "abcdefABCDEF1234567890!";
-                npass = 0; // Reiniciar el contador de passwords probados
-                char[] attempt = new char[6];
+    public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String charset = "abcdefABCDEF1234567890!";
+        npass = 0;
+        char[] attempt = new char[6];
 
-        // Intentar todas las combinaciones de longitud de 1 a 6
         for (int len = 1; len <= 6; len++) {
-            // Array para almacenar la contraseña en prueba
-
-            // Bucle para longitud 1
             for (int i = 0; i < charset.length(); i++) {
                 attempt[0] = charset.charAt(i);
-                if (len == 1 && checkPassword(attempt, len, alg, hash, salt))
-                    return new String(attempt, 0, len);
+                if (len == 1 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
 
-                // Bucle para longitud 2
-                for (int j = 0; j < charset.length(); j++) {
-                    attempt[1] = charset.charAt(j);
-                    if (len == 2 && checkPassword(attempt, len, alg, hash, salt))
-                        return new String(attempt, 0, len);
+                if (len > 1) {
+                    for (int j = 0; j < charset.length(); j++) {
+                        attempt[1] = charset.charAt(j);
+                        if (len == 2 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
 
-                    // Bucle para longitud 3
-                    for (int k = 0; k < charset.length(); k++) {
-                        attempt[2] = charset.charAt(k);
-                        if (len == 3 && checkPassword(attempt, len, alg, hash, salt))
-                            return new String(attempt, 0, len);
+                        if (len > 2) {
+                            for (int k = 0; k < charset.length(); k++) {
+                                attempt[2] = charset.charAt(k);
+                                if (len == 3 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
 
-                        // Bucle para longitud 4
-                        for (int l = 0; l < charset.length(); l++) {
-                            attempt[3] = charset.charAt(l);
-                            if (len == 4 && checkPassword(attempt, len, alg, hash, salt))
-                                return new String(attempt, 0, len);
+                                if (len > 3) {
+                                    for (int l = 0; l < charset.length(); l++) {
+                                        attempt[3] = charset.charAt(l);
+                                        if (len == 4 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
 
-                            // Bucle para longitud 5
-                            for (int m = 0; m < charset.length(); m++) {
-                                attempt[4] = charset.charAt(m);
-                                if (len == 5 && checkPassword(attempt, len, alg, hash, salt))
-                                    return new String(attempt, 0, len);
+                                        if (len > 4) {
+                                            for (int m = 0; m < charset.length(); m++) {
+                                                attempt[4] = charset.charAt(m);
+                                                if (len == 5 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
 
-                                // Bucle para longitud 6
-                                for (int n = 0; n < charset.length(); n++) {
-                                    attempt[5] = charset.charAt(n);
-                                    if (len == 6 && checkPassword(attempt, len, alg, hash, salt))
-                                        return new String(attempt, 0, len);
+                                                if (len > 5) {
+                                                    for (int n = 0; n < charset.length(); n++) {
+                                                        attempt[5] = charset.charAt(n);
+                                                        if (len == 6 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -85,8 +79,9 @@ public class Hashes {
                 }
             }
         }
-        return null; // Si no se encuentra la contraseña
+        return null;
     }
+    
 
     // Método auxiliar para verificar la contraseña
     private boolean checkPassword(char[] attempt, int len, String alg, String hash, String salt)
