@@ -38,7 +38,6 @@ public class Hashes {
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String charset = "abcdefABCDEF1234567890!"; 
         char[] password = new char[6];  
-        
         for (int i = 0; i < charset.length(); i++) {
             password[0] = charset.charAt(i); 
             for (int j = 0; j < charset.length(); j++) {
