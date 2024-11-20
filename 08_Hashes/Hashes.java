@@ -1,7 +1,9 @@
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.HexFormat;
 
 import javax.crypto.SecretKeyFactory;
@@ -23,55 +25,39 @@ public class Hashes {
     }
 
     public String getPBKDF2AmbSalt(String pw, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        int iterations = 5;
-        int keyLength = 512;
-        PBEKeySpec spec = new PBEKeySpec(pw.toCharArray(), salt.getBytes(), iterations, keyLength);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-        byte[] hashBytes = skf.generateSecret(spec).getEncoded();
+        byte[] abSalt = salt.getBytes(StandardCharsets.UTF_8);
+
+        KeySpec spec = new PBEKeySpec(pw.toCharArray(), abSalt, 65536, 128);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] abHash = factory.generateSecret(spec).getEncoded();
         HexFormat hex = HexFormat.of();
-        hash = hex.formatHex(hashBytes);
+        hash = hex.formatHex(abHash);
         return hash;
     }
 
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String charset = "abcdefABCDEF1234567890!";
-        npass = 0;
-        char[] attempt = new char[6];
-
-        for (int len = 1; len <= 6; len++) {
-            for (int i = 0; i < charset.length(); i++) {
-                attempt[0] = charset.charAt(i);
-                if (len == 1 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
-
-                if (len > 1) {
-                    for (int j = 0; j < charset.length(); j++) {
-                        attempt[1] = charset.charAt(j);
-                        if (len == 2 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
-
-                        if (len > 2) {
-                            for (int k = 0; k < charset.length(); k++) {
-                                attempt[2] = charset.charAt(k);
-                                if (len == 3 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
-
-                                if (len > 3) {
-                                    for (int l = 0; l < charset.length(); l++) {
-                                        attempt[3] = charset.charAt(l);
-                                        if (len == 4 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
-
-                                        if (len > 4) {
-                                            for (int m = 0; m < charset.length(); m++) {
-                                                attempt[4] = charset.charAt(m);
-                                                if (len == 5 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
-
-                                                if (len > 5) {
-                                                    for (int n = 0; n < charset.length(); n++) {
-                                                        attempt[5] = charset.charAt(n);
-                                                        if (len == 6 && checkPassword(attempt, len, alg, hash, salt)) return new String(attempt, 0, len);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+        String charset = "abcdefABCDEF1234567890!"; 
+        char[] password = new char[6];  
+        
+        for (int i = 0; i < charset.length(); i++) {
+            password[0] = charset.charAt(i); 
+            for (int j = 0; j < charset.length(); j++) {
+                password[1] = charset.charAt(j); 
+                for (int k = 0; k < charset.length(); k++) {
+                    password[2] = charset.charAt(k); // ...
+                    for (int l = 0; l < charset.length(); l++) {
+                        password[3] = charset.charAt(l); 
+                        for (int m = 0; m < charset.length(); m++) {
+                            password[4] = charset.charAt(m); 
+                            for (int n = 0; n < charset.length(); n++) {
+                                password[5] = charset.charAt(n); 
+                                String attempt = new String(password);
+                                npass++; 
+                                String generatedHash = (alg.equals("SHA-512")) ? 
+                                        getSHA512AmbSalt(attempt, salt) : getPBKDF2AmbSalt(attempt, salt); 
+                                        
+                                if (generatedHash != null && generatedHash.equals(hash)) {
+                                    return attempt;
                                 }
                             }
                         }
@@ -79,25 +65,8 @@ public class Hashes {
                 }
             }
         }
-        return null;
-    }
-    
-
-    // Método auxiliar para verificar la contraseña
-    private boolean checkPassword(char[] attempt, int len, String alg, String hash, String salt)
-            throws NoSuchAlgorithmException, InvalidKeySpecException {
-        npass++; // Incrementar el contador de passwords probados
-        String generatedHash;
-
-        // Calcular el hash según el algoritmo especificado
-        if (alg.equals("SHA-512")) {
-            generatedHash = getSHA512AmbSalt(new String(attempt, 0, len), salt);
-        } else {
-            generatedHash = getPBKDF2AmbSalt(new String(attempt, 0, len), salt);
-        }
-
-        // Verificar si el hash generado coincide con el hash objetivo
-        return generatedHash.equals(hash);
+        
+        return null; 
     }
 
     public String getInterval(long t1, long t2) {
