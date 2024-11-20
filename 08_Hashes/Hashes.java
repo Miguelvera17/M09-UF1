@@ -37,26 +37,26 @@ public class Hashes {
 
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String charset = "abcdefABCDEF1234567890!"; 
-        char[] password = new char[6];  
+        char[] pass = new char[6];  
         for (int i = 0; i < charset.length(); i++) {
-            password[0] = charset.charAt(i); 
+            pass[0] = charset.charAt(i); 
             for (int j = 0; j < charset.length(); j++) {
-                password[1] = charset.charAt(j); 
+                pass[1] = charset.charAt(j); 
                 for (int k = 0; k < charset.length(); k++) {
-                    password[2] = charset.charAt(k); // ...
+                    pass[2] = charset.charAt(k); // ...
                     for (int l = 0; l < charset.length(); l++) {
-                        password[3] = charset.charAt(l); 
+                        pass[3] = charset.charAt(l); 
                         for (int m = 0; m < charset.length(); m++) {
-                            password[4] = charset.charAt(m); 
+                            pass[4] = charset.charAt(m); 
                             for (int n = 0; n < charset.length(); n++) {
-                                password[5] = charset.charAt(n); 
-                                String attempt = new String(password);
+                                pass[5] = charset.charAt(n); 
+                                String att = new String(pass);
                                 npass++; 
                                 String generatedHash = (alg.equals("SHA-512")) ? 
-                                        getSHA512AmbSalt(attempt, salt) : getPBKDF2AmbSalt(attempt, salt); 
+                                        getSHA512AmbSalt(att, salt) : getPBKDF2AmbSalt(att, salt); 
                                         
                                 if (generatedHash != null && generatedHash.equals(hash)) {
-                                    return attempt;
+                                    return att;
                                 }
                             }
                         }
